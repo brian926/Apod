@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var apiModel = require('../models/apiModel');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +11,6 @@ router.get('/', function(req, res, next) {
   ];
 
   var tagline = "No programming concept is complete without a cute animal mascot.";
-  
   res.render('index', { mascots: mascots, tagline: tagline });
 });
 
