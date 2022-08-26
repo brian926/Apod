@@ -9,6 +9,9 @@ router.get('/', function(req, res, next) {
     { name: 'Tux', organization: "Linux", birth_year: 1996},
     { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
   ];
+  apiModel().then((url) =>{
+    console.log(url)
+  }).catch(console.error)
 
   var tagline = "No programming concept is complete without a cute animal mascot.";
   res.render('index', { mascots: mascots, tagline: tagline });
