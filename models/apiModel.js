@@ -4,6 +4,7 @@ const https = require('https')
 const apiKey = process.env.API_KEY;
 const apodUrl = 'https://api.nasa.gov/planetary/apod?api_key=' + apiKey
 
+// Export the promise which is a API to NASA's API
 module.exports = () => new Promise((resolve, reject) => {
     https.get(apodUrl, response => {
       try {
