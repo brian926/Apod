@@ -11,13 +11,20 @@
 
 <main>
   <div class="jumbotron">
-    <h1>This is great</h1>
-    <p>Welcome to templating using EJS</p>
+    <h1>NASA's APOD: Astronomy Picture of the Day</h1>
+    <p>Provided by NASA and Michigan Technological University</p>
 
     <h2><%= apod.title %></h2>
-    <p><%= apod.title %></p>
-    <img src="<%= apod.media_type == 'image' ? apod.url : '' %>" alt="">
-    <p><%= apod.explanation %></p>
+    <p><%= apod.date %></p>
+    <%  if(apod.media_type == 'image') { %>
+        <img src="<%= apod.url %>" alt="">
+
+    <% } else { %>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" title="<%= apod.title %>" src="<%= apod.url %>" allowfullscreen></iframe>
+      </div>
+    <% } %>
+    <p class="p-2"><%= apod.explanation %></p>
 
   </div>
 </main>
