@@ -3,30 +3,35 @@
 <head>
   <%- include('./partials/head'); %>
 </head>
-<body class="container">
+<body class="container py-4">
 
 <header>
   <%- include('./partials/header'); %>
 </header>
 
 <main>
-  <div class="jumbotron">
+  <div class="p-5 mb-4 bg-light border-top rounded-3">
     <h1>NASA's APOD: Astronomy Picture of the Day</h1>
     <p>Provided by NASA and Michigan Technological University</p>
-
-    <h2><%= apod.title %></h2>
-    <p><%= apod.date %></p>
-    <%  if(apod.media_type == 'image') { %>
-        <img src="<%= apod.url %>" alt="">
-
-    <% } else { %>
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" title="<%= apod.title %>" src="<%= apod.url %>" allowfullscreen></iframe>
-      </div>
-    <% } %>
-    <p class="p-2"><%= apod.explanation %></p>
-
   </div>
+  <div class="row">
+    <div class="col-md-5">
+      <h2><%= apod.title %></h2>
+      <p><%= apod.date %></p>
+      <p><%= apod.explanation %></p>
+    </div>
+    <div class="col-md-7">
+      <%  if(apod.media_type == 'image') { %>
+        <img class="img-fluid" src="<%= apod.url %>" alt="">
+
+      <% } else { %>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" title="<%= apod.title %>" src="<%= apod.url %>" allowfullscreen></iframe>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  
 </main>
 
 <footer>
