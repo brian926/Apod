@@ -18,6 +18,7 @@ router.post('/', function(req, res, next) {
     // // Perform API Promise call, assign object to apodUrl
     apiTest.call().then((api) =>{
       apodURL = api.url;
+      // Render the view once our promise finished so we can pass the apodUrl object
       res.render('pastApods', { apod: apodURL });
     }).catch(console.error)  
   });
