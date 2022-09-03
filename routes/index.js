@@ -5,10 +5,13 @@ var apiModel = require('../models/apiModel');
 // Create API object
 let apodURL = {}
 
-// Perform API Promise call, assign object to apodUrl
-apiModel().then((api) =>{
+const apiTest = new apiModel
+
+// // Perform API Promise call, assign object to apodUrl
+apiTest.call().then((api) =>{
   apodURL = api.url
-}).catch(console.error)
+ }).catch(console.error)
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

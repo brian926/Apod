@@ -1,12 +1,19 @@
 require('dotenv').config();
 const https = require('https')
 
-const apiKey = process.env.API_KEY;
-const apodUrl = 'https://api.nasa.gov/planetary/apod?api_key=' + apiKey
+class APOD {
+  constructor(){
+    this.apiKey = process.env.API_KEY;
+    this.url = 'https://api.nasa.gov/planetary/apod?api_key='
+    this.apodUrl = this.url + this.apiKey
+  }
 
-// Export the promise which is a API to NASA's API
-module.exports = () => new Promise((resolve, reject) => {
-    https.get(apodUrl, response => {
+  set addDate(date) {
+    this.apodUrl = this.url + this.apiKey + '&date=' + date
+  }
+
+  call = () => new Promise((resolve, reject) => {
+    https.get(this.apodUrl, response => {
       try {
         let body = " ";
   
@@ -22,3 +29,6 @@ module.exports = () => new Promise((resolve, reject) => {
       }
     });
   });
+};
+
+module.exports = APOD
