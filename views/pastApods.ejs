@@ -10,19 +10,23 @@
 </header>
 
 <main>
-  <div>
+  <div class="p-5 mb-4 bg-light border-top rounded-3">
+    <h1>NASA's APOD: Astronomy Picture of the Day</h1>
+    <p>Provided by NASA and Michigan Technological University</p>
+    <p>Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.</p>
     <form action="/pastApods" method="POST">
-        <input type="date" id="datepicker" name="datepicker">
-        <input type="submit">
+      <div class="form-inline justify-content-center">
+          <div class="col-2">
+            <input class="form-control" type="date" id="datepicker" name="datepicker">
+          </div>
+          <div class="col-2">
+            <input class="form-control" type="submit">
+          </div>
+      </div>
     </form>
   </div>
   
   <% if (apod) { %>
-    <div class="p-5 mb-4 bg-light border-top rounded-3">
-      <h1>NASA's APOD: Astronomy Picture of the Day</h1>
-      <p>Provided by NASA and Michigan Technological University</p>
-      <p>Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.</p>
-    </div>
     <div class="row">
       <div class="col-md-5">
         <h2><%= apod.title %></h2>
