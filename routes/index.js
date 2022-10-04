@@ -15,7 +15,7 @@ apiTest.call().then((api) =>{
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
+  
   // pass apodUrl and perform check on view if media_type is equal to image
   res.render('index', { apod: apodURL });
 });
