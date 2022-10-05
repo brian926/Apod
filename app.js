@@ -3,11 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const sgMail = require('@sendgrid/mail');
-const sgClient = require('@sendgrid/client');
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-sgClient.setApiKey(process.env.SENDGRID_API_KEY);
 
 var indexRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');

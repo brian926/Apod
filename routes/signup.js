@@ -1,5 +1,10 @@
 var express = require('express');
 var router = express.Router();
+const sgMail = require('@sendgrid/mail');
+const sgClient = require('@sendgrid/client');
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgClient.setApiKey(process.env.SENDGRID_API_KEY);
 
 const signUpPage = {
     title: 'Join Our Newsletter',
@@ -68,7 +73,7 @@ router.post('/', async (req, res) => {
     const confirmationURL = req.protocol + '://' + req.headers.host + '/confirm/?' + params;
     const msg = {
       to: req.body.email,
-      from: 'SENDER_EMAIL', // Change to your verified sender
+      from: 'brian.antunes926@gmail.com', // Change to your verified sender
       subject: `Confirm your subscription to our newsletter`,
       html: `Hello ${req.body.firstname},<br>Thank you for subscribing to our newsletter. Please complete and confirm your subscription by <a href="${confirmationURL}"> clicking here</a>.`
     }
