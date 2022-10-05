@@ -18,9 +18,9 @@ async function getContactByEmail(email) {
   const response = await sgClient.request(request);
   if(response[1].result[email]) return response[1].result[email].contact;
   else return null;
- }
+}
  
- async function getListID(listName) {
+async function getListID(listName) {
   const request = {
     url: `/v3/marketing/lists`,
     method: 'GET',
@@ -28,9 +28,9 @@ async function getContactByEmail(email) {
   const response = await sgClient.request(request);
   const allLists = response[1].result;
   return allLists.find(x => x.name === listName).id;
- }
+}
  
- async function addContactToList(email, listID) {
+async function addContactToList(email, listID) {
   const data = {
     "list_ids": [listID],
     "contacts": [{
@@ -43,7 +43,7 @@ async function getContactByEmail(email) {
     body: data
   }
   return sgClient.request(request);
- }
+}
 
 router.get('/', async (req, res) => {
   try {
