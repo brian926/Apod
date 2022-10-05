@@ -9,6 +9,7 @@ var aboutRouter = require('./routes/about');
 var pastRouter = require('./routes/pastApods');
 var liveRouter = require('./routes/live');
 var signUpRouter = require('./routes/signup');
+var confirmRouter = require('./routes/confirm')
 
 var app = express();
 
@@ -23,10 +24,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.get('/confirm', async (req, res) => {
-
-})
-
 app.get('/delete', async (req, res) => {
 
 })
@@ -36,6 +33,7 @@ app.use('/about', aboutRouter);
 app.use('/live', liveRouter);
 app.use('/pastApods', pastRouter);
 app.use('/signup', signUpRouter)
+app.use('/confirm', confirmRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
