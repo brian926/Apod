@@ -11,6 +11,7 @@ var liveRouter = require('./routes/live');
 var signUpRouter = require('./routes/signup');
 var confirmRouter = require('./routes/confirm')
 var deleteRouter = require('./routes/delete')
+var uploadRouter = require('./routes/upload')
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use('/pastApods', pastRouter);
 app.use('/signup', signUpRouter)
 app.use('/confirm', confirmRouter)
 app.use('/delete', deleteRouter)
+app.use('/upload', uploadRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

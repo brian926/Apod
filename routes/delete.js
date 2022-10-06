@@ -44,9 +44,10 @@ async function getListID(listName) {
 router.get('/', async (req, res) => {
     try {
         const contact = await getContactByEmail(req.query.email);
+        console.log(contact.email, req.query.email)
         if(contact == null) throw `Contact not found.`;
         if (contact.custom_fields.conf_num ==  req.query.conf_num) {
-            const listID = await getListID('Newsletter Subscribers');
+            const listID = await getListID('Newsletter');
             await deleteContactFromList(listID, contact);
             res.render('message', { message: 'You have been successfully unsubscribed. If this was a mistake re-subscribe <a href="/signup">here</a>.' });
         }
