@@ -1,27 +1,33 @@
 var express = require('express');
 var router = express.Router();
-const sgMail = require('@sendgrid/mail');
-const sgClient = require('@sendgrid/client');
+const sgClient = require('../models/sg');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-sgClient.setApiKey(process.env.SENDGRID_API_KEY);
+var apiModel = require('../models/apiModel');
 
-const uploadPage = {
-    title: 'Upload Newsletter',
-    subtitle: 'Upload an HTML newsletter to send out to subscribers',
-    form: `<form action="/upload" id="contact-form" enctype="multipart/form-data" method="post" style="margin: 10%; margin-left:5%; width: 350px;">
-    <div class="form-group">
-        <label for="subject">Email Subject:</label>
-        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
-    </div>
-    <div class="form-group">
-        <label for="newsletter">Newsletter: </label>
-        <input type="file" id="newsletter" name="newsletter" accept=".html" required>
-    </div>
-    <button type="submit" style="background:#0263e0 !important;" class="btn btn-primary">Send</button>
-   </form>`
+// Create API object
+let apodURL = {}
+
+const apiTest = new apiModel
+
+// // Perform API Promise call, assign object to apodUrl
+apiTest.call().then((api) =>{
+  apodURL = api.url
+ }).catch(console.error)
+
+const apodLetter = {
+    text : `<div>
+                <h2> apod.title </h2>
+                <p> apod.date </p>
+                <p> apod.explanation </p>
+            </div>`
 }
-   
+ 
+if(apod.media_type == 'image') {
+    apodLetter.text += `<img src="<%= apod.url %>" alt="">`
+} else {
+    apodLetter.text +=`<iframe class="embed-responsive-item" title="<%= apod.title %>" src="<%= apod.url %>" allowfullscreen></iframe>`
+}
+
 async function sendNewsletterToList(req, htmlNewsletter, listID) {
     const data = {
     "query": `CONTAINS(list_ids, '${listID}')`

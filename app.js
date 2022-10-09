@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cron = require('node-cron')
 
 var indexRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');
@@ -34,6 +35,11 @@ app.use('/signup', signUpRouter)
 app.use('/confirm', confirmRouter)
 app.use('/delete', deleteRouter)
 app.use('/upload', uploadRouter)
+
+// cronjob
+cron.schedule('* * 8 * * *', () => {
+  console.log('running the cronjob')
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
