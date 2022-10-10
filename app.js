@@ -37,7 +37,7 @@ app.use('/delete', deleteRouter)
 app.use('/upload', uploadRouter)
 
 // cronjob
-cron.schedule('* * 8 * * *', () => {
+cron.schedule('0 8 * * *', () => {
   console.log('running the cronjob')
 })
 

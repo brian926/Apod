@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const sgClient = require('../models/sg');
+const { sgClient, sgMail } = require('../models/sg');
 
 const signUpPage = {
     title: 'Join Our Newsletter',
