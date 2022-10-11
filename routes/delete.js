@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const sgClient = require('../models/sg');
+const sg = require('../models/sg');
 
 async function deleteContactFromList(listID, contact) {
     const request = {
@@ -10,7 +10,7 @@ async function deleteContactFromList(listID, contact) {
         "contact_ids": contact.id
       }
     }
-    await sgClient.request(request);
+    await sg.sgClient.request(request);
 }
 
 async function getContactByEmail(email) {
@@ -22,7 +22,7 @@ async function getContactByEmail(email) {
       method: 'POST',
       body: data
     }
-    const response = await sgClient.request(request);
+    const response = await sg.sgClient.request(request);
     if(response[1].result[email]) return response[1].result[email].contact;
     else return null;
 }
@@ -32,7 +32,7 @@ async function getListID(listName) {
       url: `/v3/marketing/lists`,
       method: 'GET',
     }
-    const response = await sgClient.request(request);
+    const response = await sg.sgClient.request(request);
     const allLists = response[1].result;
     return allLists.find(x => x.name === listName).id;
 }

@@ -45,12 +45,12 @@ async function sendNewsletterToList(htmlNewsletter, listID) {
         conf_num: subscriber.custom_fields.conf_num,
         email: subscriber.email,
     });
-    //const unsubscribeURL = req.protocol + '://' + req.headers.host + '/delete/?' + params;
+    const unsubscribeURL = req.protocol + '://' + req.headers.host + '/delete/?' + params;
     const msg = {
         to: subscriber.email, // Change to your recipient
         from: process.env.SENDGRID_EMAIL, // Change to your verified sender
         subject: "Hello World",
-        html: htmlNewsletter //+ `<a href="${unsubscribeURL}"> Unsubscribe here</a>`,
+        html: htmlNewsletter + `<a href="${unsubscribeURL}"> Unsubscribe here</a>`,
     }
     sg.sgMail.send(msg);
     }
