@@ -34,11 +34,11 @@ app.use('/pastApods', pastRouter);
 app.use('/signup', signUpRouter)
 app.use('/confirm', confirmRouter)
 app.use('/delete', deleteRouter)
-app.use('/upload', uploadRouter)
 
 // cronjob
-cron.schedule('0 8 * * *', () => {
+cron.schedule('0 31 9 * * *', () => {
   console.log('running the cronjob')
+  uploadRouter.upload();
 })
 
 // catch 404 and forward to error handler

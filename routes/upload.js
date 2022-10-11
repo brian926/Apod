@@ -30,7 +30,7 @@ async function getApod() {
     return apodLetter
 }
 
-async function sendNewsletterToList(req, htmlNewsletter, listID) {
+async function sendNewsletterToList(htmlNewsletter, listID) {
     const data = {
     "query": `CONTAINS(list_ids, '${listID}')`
     };
@@ -45,12 +45,12 @@ async function sendNewsletterToList(req, htmlNewsletter, listID) {
         conf_num: subscriber.custom_fields.conf_num,
         email: subscriber.email,
     });
-    const unsubscribeURL = req.protocol + '://' + req.headers.host + '/delete/?' + params;
+    //const unsubscribeURL = req.protocol + '://' + req.headers.host + '/delete/?' + params;
     const msg = {
         to: subscriber.email, // Change to your recipient
         from: process.env.SENDGRID_EMAIL, // Change to your verified sender
         subject: "Hello World",
-        html: htmlNewsletter + `<a href="${unsubscribeURL}"> Unsubscribe here</a>`,
+        html: htmlNewsletter //+ `<a href="${unsubscribeURL}"> Unsubscribe here</a>`,
     }
     sg.sgMail.send(msg);
     }
@@ -66,11 +66,11 @@ async function getListID(listName) {
     return allLists.find(x => x.name === listName).id;
 }
 
-router.get('/', async(req, res) => {
+async function upload() {
     const listID = await getListID('Newsletter');
     const htmlNewsletter = await getApod();
-    await sendNewsletterToList(req, htmlNewsletter, listID)
-    res.render('message', { message: 'Newsletter has been sent to all subscribers.' });
-});
+    await sendNewsletterToList(htmlNewsletter, listID)
+    //res.render('message', { message: 'Newsletter has been sent to all subscribers.' });
+};
 
-module.exports = router;
+module.exports = upload();
