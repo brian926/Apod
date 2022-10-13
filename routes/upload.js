@@ -45,7 +45,8 @@ async function sendNewsletterToList(htmlNewsletter, listID) {
         conf_num: subscriber.custom_fields.conf_num,
         email: subscriber.email,
     });
-    const unsubscribeURL = req.protocol + '://' + req.headers.host + '/delete/?' + params;
+    console.log(params)
+    const unsubscribeURL = 'http://localhost:3000/delete/?' + params;
     const msg = {
         to: subscriber.email, // Change to your recipient
         from: process.env.SENDGRID_EMAIL, // Change to your verified sender
@@ -70,7 +71,6 @@ async function upload() {
     const listID = await getListID('Newsletter');
     const htmlNewsletter = await getApod();
     await sendNewsletterToList(htmlNewsletter, listID)
-    //res.render('message', { message: 'Newsletter has been sent to all subscribers.' });
 };
 
 module.exports = upload();
