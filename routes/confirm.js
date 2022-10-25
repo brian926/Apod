@@ -51,7 +51,7 @@ router.get('/', async (req, res) => {
     } else {
       throw 'Confirmation number does not match';
     }
-    res.render('message', { message: 'You are now subscribed to our newsletter. We can\'t wait for you to hear from us!' });
+    res.render('message', { message: 'You are now subscribed to our newsletter. We can\'t wait for you to hear from us! <p><a href="/">Home</a></p>' });
   } catch (error) {
     console.error(error);
     res.render('message', { message: 'Subscription was unsuccessful. Please <a href="/signup">try again.</a>' });
