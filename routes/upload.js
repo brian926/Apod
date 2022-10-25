@@ -25,7 +25,7 @@ async function getApod() {
     if(apodURL.media_type == 'image') {
         apodLetter += `<div><img src="${apodURL.url}" alt=""></div>`
     } else {
-        apodLetter += `<div><iframe class="embed-responsive-item" title="${apodURL.title}" src="${apodURL.url}" allowfullscreen></iframe></div>`
+        apodLetter += `<div><a href="${apodURL.url}">Today's APOD is in video format, check out the video here!</a></div>`
     }
     return apodLetter
 }
