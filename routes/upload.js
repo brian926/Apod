@@ -46,7 +46,7 @@ async function sendNewsletterToList(htmlNewsletter, listID) {
         email: subscriber.email,
     });
     console.log(params)
-    const unsubscribeURL = 'http://localhost:3000/delete/?' + params;
+    const unsubscribeURL = 'https://star-gazers-apod.onrender.com/delete/?' + params;
     const msg = {
         to: subscriber.email, // Change to your recipient
         from: process.env.SENDGRID_EMAIL, // Change to your verified sender
