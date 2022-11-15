@@ -35,10 +35,13 @@ app.use('/confirm', confirmRouter)
 app.use('/delete', deleteRouter)
 
 // cronjob
-cron.schedule('15 15 * * *', () => {
+cron.schedule('30 15 * * *', () => {
   var uploadRouter = require('./routes/upload')
   console.log('running the cronjob')
   uploadRouter.upload();
+},{
+  scheduled: true,
+  timezone: "America/New_York"
 })
 
 // catch 404 and forward to error handler
