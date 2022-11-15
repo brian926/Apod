@@ -35,7 +35,7 @@ app.use('/confirm', confirmRouter)
 app.use('/delete', deleteRouter)
 
 // cronjob
-cron.schedule('45 14 * * *', function() {
+cron.schedule('0 0 15 * * *', () => {
   var uploadRouter = require('./routes/upload')
   console.log('running the cronjob')
   uploadRouter;
