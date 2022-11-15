@@ -12,7 +12,6 @@ var liveRouter = require('./routes/live');
 var signUpRouter = require('./routes/signup');
 var confirmRouter = require('./routes/confirm')
 var deleteRouter = require('./routes/delete')
-var uploadRouter = require('./routes/upload')
 
 var app = express();
 
@@ -36,7 +35,8 @@ app.use('/confirm', confirmRouter)
 app.use('/delete', deleteRouter)
 
 // cronjob
-cron.schedule('0 31 9 * * *', () => {
+cron.schedule('0 8 * * *', () => {
+  var uploadRouter = require('./routes/upload')
   console.log('running the cronjob')
   uploadRouter.upload();
 })
