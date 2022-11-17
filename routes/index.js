@@ -7,15 +7,19 @@ let apodURL = {}
 
 const apiTest = new apiModel
 
-// // Perform API Promise call, assign object to apodUrl
+// Perform API Promise call, assign object to apodUrl
 apiTest.call().then((api) =>{
   apodURL = api.url
  }).catch(console.error)
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  
+router.get('/', async(req, res, next) => {
+  // Perform API Promise call, assign object to apodUrl
+  await apiTest.call().then((api) =>{
+    apodURL = api.url
+  }).catch(console.error)
+
   // pass apodUrl and perform check on view if media_type is equal to image
   res.render('index', { apod: apodURL });
 });
