@@ -25,7 +25,7 @@ async function getApod() {
     if(apodURL.media_type == 'image') {
         apodLetter += `<div><img src="${apodURL.url}" alt=""></div>`
     } else {
-        apodLetter += `<div><iframe class="embed-responsive-item" title="${apodURL.title}" src="${apodURL.url}" allowfullscreen></iframe></div>`
+        apodLetter += `<div><a href="${apodURL.url}">Today's APOD is in video format, check out the video here!</a></div>`
     }
     return apodLetter
 }
@@ -45,7 +45,8 @@ async function sendNewsletterToList(htmlNewsletter, listID) {
         conf_num: subscriber.custom_fields.conf_num,
         email: subscriber.email,
     });
-    const unsubscribeURL = req.protocol + '://' + req.headers.host + '/delete/?' + params;
+    console.log(params)
+    const unsubscribeURL = 'https://star-gazers-apod.onrender.com/delete/?' + params;
     const msg = {
         to: subscriber.email, // Change to your recipient
         from: process.env.SENDGRID_EMAIL, // Change to your verified sender
@@ -70,7 +71,6 @@ async function upload() {
     const listID = await getListID('Newsletter');
     const htmlNewsletter = await getApod();
     await sendNewsletterToList(htmlNewsletter, listID)
-    //res.render('message', { message: 'Newsletter has been sent to all subscribers.' });
 };
 
 module.exports = upload();
