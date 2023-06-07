@@ -13,7 +13,6 @@ class APOD {
   }
 
   call = () => new Promise((resolve, reject) => {
-    var url;
     https.get(this.apodUrl, response => {
       try {
         let body = " ";
@@ -23,7 +22,7 @@ class APOD {
         });
         response.on('end', () => {
           if (response.headers['content-type'] == "application/json") {
-            url = JSON.parse(body);
+            const url = JSON.parse(body);
             resolve({ url: url });
           }
         });
