@@ -2,7 +2,7 @@ require('dotenv').config();
 const https = require('https')
 
 class APOD {
-  constructor(){
+  constructor() {
     this.apiKey = process.env.API_KEY;
     this.url = 'https://api.nasa.gov/planetary/apod?api_key='
     this.apodUrl = this.url + this.apiKey
@@ -16,13 +16,18 @@ class APOD {
     https.get(this.apodUrl, response => {
       try {
         let body = " ";
-  
+
         response.on('data', data => {
           body += data.toString();
         });
         response.on('end', () => {
-          const url = JSON.parse(body);
-          resolve({url: url});
+          try {
+            const url = JSON.parse(body);
+            resolve({ url: url });
+          } catch (e) {
+            console.log(e)
+          }
+
         });
       } catch (error) {
         reject(error);
