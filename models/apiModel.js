@@ -22,13 +22,10 @@ class APOD {
           body += data.toString();
         });
         response.on('end', () => {
-          try {
+          if (response.headers['content-type'] == "application/json") {
             url = JSON.parse(body);
             resolve({ url: url });
-          } catch (e) {
-            console.log(e)
           }
-
         });
       } catch (error) {
         reject(error);
